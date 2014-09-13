@@ -3,7 +3,12 @@
 
 set(name BioFractalTree)
 
-set(sources BioFractalTree.cpp)
+set(sources 
+  BioFractalTree.cpp
+  ../bezierDefs/bcurve.cpp
+  ../bezierDefs/point.cpp
+  ../bezierDefs/bBasis.cpp
+)
 
 add_executable(${name} ${sources})
 

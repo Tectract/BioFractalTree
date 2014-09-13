@@ -3,7 +3,9 @@
 Hash: SHA1
 
 
- * File:   BioFractalTree.hpp
+ * File:   point.hpp
+ *   a point object in 3D real-space, with a global index
+ *
  * Author: Ryan Molecke, Ph.D.
  *
  * Created on September 6, 2014, 6:50 AM
@@ -41,15 +43,24 @@ Wcftvy9fjgc8ch+MJlAM
 -----END PGP SIGNATURE-----
 */
 
-#include "../bezierDefs/bcurve.hpp"
+#include <vector>
+#include <cstdint>
+using namespace std;
 
-class BioFractalTree {
+class point {
 private:
-  int branches;
-  int depth;
-  // vector<vector<bcurve>> curve;
-  // vector<vector<bPatch>> surface;
+  vector<double> *coord; // x, y, z coord doubles
+  int64_t gIndex;        // all points have a global index
+
 public:
-  BioFractalTree();
-  ~BioFractalTree();
+  point(vector<double> &pointSet, int64_t ind);
+  int setCoord(vector<double> &pointSet);
+  int setIndex(int64_t ind) {
+    return (gIndex = ind);
+  };
+  int64_t getIndex() {
+    return gIndex;
+  };
+  void getCoord(vector<double> &returnCoord);
+  ~point() {};
 };
