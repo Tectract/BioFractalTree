@@ -3,7 +3,9 @@
 Hash: SHA1
 
 
- * File:   BioFractalTree.hpp
+ * File:   bcurve.hpp
+ *    a bezier curve object, holds a vector of control points
+ *
  * Author: Ryan Molecke, Ph.D.
  *
  * Created on September 6, 2014, 6:50 AM
@@ -41,15 +43,23 @@ Wcftvy9fjgc8ch+MJlAM
 -----END PGP SIGNATURE-----
 */
 
-#include "../bezierDefs/bcurve.hpp"
+#include <vector>
+#include "point.hpp"
+#include "bBasis.hpp"
+using namespace std;
 
-class BioFractalTree {
-private:
-  int branches;
-  int depth;
-  // vector<vector<bcurve>> curve;
-  // vector<vector<bPatch>> surface;
-public:
-  BioFractalTree();
-  ~BioFractalTree();
+class bcurve {
+  private:
+    vector<point> *controlPoints; // two endpoints plus control points
+    int resolution; // used for space-splitting, neighbor-tracking, mesh output
+
+  public:
+    bcurve(vector<point>& pointSet, int Res);
+    int setPoints(vector<point>& pointSet); // re/set the control points
+    int setRes(int Res){ return (resolution = Res);}; // set resolution
+    int getRes(){ return resolution; }; // get the resolution
+    void getPoints(vector<point>& returnPoints); // returns control points
+    int getPointsOnCurve(vector<point>& returnPoints, vector<vector<double>>& basis, int indStart); // actual points
+    int size(){return controlPoints->size();}; // number of control points
+    ~bcurve(){};
 };

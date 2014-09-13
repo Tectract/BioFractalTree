@@ -3,8 +3,8 @@
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
-find_path(BioFractalTreeInc src/main/BioFractalTree.h)
 include_directories(
-  ${BioFractalTree}
+  main
+  bezierDefs
 )
 add_subdirectory(main)
